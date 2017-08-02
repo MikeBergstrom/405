@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <meta charset="utf-8">
+  <title>Express Lane Toll Rates</title>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="col-md-4">
+      <a href='logout'>Log Out</a>
+      <h2>Saved routes:</h2>
+      <h4 *ngFor='let toll of tolls'>
+        <span *ngFor='let route of user.routes,let idx = index'>
+            <span *ngIf='toll.TravelDirection==route.direction && toll.StartLocationName ==route.entry && toll.EndLocationName ==route.exit'>
+              <h4><strong>{{route.name}}</strong></h4>
+              <h5>Toll Rate: <strong>{{toll.CurrentToll | addDecimal | currency: 'USD' :true}}</strong></h5>
+              <h6>Heading <strong>{{toll.TravelDirection}}</strong> from <strong>{{toll.StartLocationName}}</strong> to <strong>{{toll.EndLocationName}}</strong></h6>
+              <button class='btn-xs' (click)='delete(idx)'>Delete Route</button>
+            </span>
+          </span>
+      </h4>
+        <br>
+        <h2>Add a route: </h2>
+      <div class="form-group">
+        <form (submit)='calculate()' #routeForm='ngForm'>
+          <label>What direction are you heading on 405?</label>
+          <select class="form-control" name='direction' [(ngModel)]='route.direction'>
+    <option value="S">Southbound</option>
+    <option value="N">Northbound</option>
+  </select><br>
+          <label>Select entry point: </label>
+          <select class="form-control" *ngIf='!route.direction'></select>
+          <select class="form-control" *ngIf='route.direction=="S"' name='entry' [(ngModel)]='route.entry'>
+    <option value="SR 524">Start of express lanes(SR 524)</option>
+    <option value="216th ST SE">216th ST SE</option>
+    <option value="231st SE">231st SE</option>
+    <option value="SR 522">SR 522</option>
+    <option value="NE 145th">NE 145th</option>
+    <option value="NE 128th">NE 128th</option>
+    <option value="NE 108th">NE 108th</option>
+    <option value="NE 53rd">NE 53rd</option>
+  </select><br>
+          <select class="form-control" *ngIf='route.direction=="N"' name='entry' [(ngModel)]='route.entry'>
+    <option value="216th SE">216th SE</option>
+    <option value="231st SE">231st SE</option>
+    <option value="NE 128th St">NE 128th St</option>
+    <option value="NE 97th">NE 97th</option>
+    <option value="SR 520">SR 520</option>
+    <option value="NE 6th">NE 6th</option>
+    <option value="NE 4th">Start of Express Lanes(NE 4th)</option>
+  </select><br>
+          <label>Select exit point: </label>
+          <select class="form-control" *ngIf='!route.direction'></select>
+          <select class="form-control" *ngIf='route.direction=="S"' name="exit" [(ngModel)]='route.exit'>
+    <option value="NE 128th">NE 128th</option>
+    <option value="NE 85th">NE 85th</option>
+    <option value="NE 6th">NE 6th</option>
+  </select><br>
+          <select class="form-control" *ngIf='route.direction=="N"' name="exit" [(ngModel)]='route.exit'>
+    <option value="I-5">I-5</option>
+    <option value="SR 522">SR 522</option>
+    <option value="NE 124th St">NE 124th St</option>
+  </select><br>
+          <label>Save route?</label>
+          <input type="checkbox" name='save' [(ngModel)]='save'><br>
+          <label>Route Name</label>
+          <input type="text" name='name' [(ngModel)]='route.name'><br>
+          <input [disabled]='!routeForm.form.valid' type="submit" value="Get Toll">
+        </form>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <img src='https://www.wsdot.wa.gov/sites/default/files/2015/11/12/WSDOT0140_ZFold_Toll_Map_1.gif' width="500">
+    </div>
+
+  </div>
+</body>
+
+</html>

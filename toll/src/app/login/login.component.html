@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <meta charset="utf-8">
+  <title>Express Lane Toll Rates</title>
+</head>
+
+<body>
+  <div class='container-fluid'>
+    <div class='col-md-6'>
+      <h1>Login</h1>
+      <div class='form-group'>
+        <form (submit)='login()' #loginForm='ngForm'>
+          <label>Email: </label>
+          <input class="form-control" type="text" name="email" required [(ngModel)]="user.email"><br>
+          <label>Password: </label>
+          <input class="form-control" type="password" name="password" required [(ngModel)]="user.password"><br>
+          <input type="submit" value="Log In" [disabled]='!loginForm.form.valid'>
+          <span style="color: red;" *ngIf="loginError">Email or password is incorrect</span>
+        </form>
+      </div>
+      <a href='register'>New user? Register here...</a>
+    </div>
+    <div class="col-mid-6">
+      <img src="https://www.wsdot.wa.gov/sites/default/files/2015/11/12/I405tollratessign98.jpg" width="400">
+    </div>
+  </div>
+</body>
+
+</html>
