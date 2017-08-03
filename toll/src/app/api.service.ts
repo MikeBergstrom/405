@@ -7,8 +7,13 @@ export class ApiService {
 
   constructor(private _http:Http) { }
 
+    // getTolls(){
+    //   return this._http.get("http://www.wsdot.wa.gov/traffic/api/api/tolling?accesscode=1362087f-e048-4d10-b705-bbf06a0eef8d")
+    //   .map(data=>data.json())
+    //   .toPromise()
+    // }
     getTolls(){
-      return this._http.get("http://www.wsdot.wa.gov/traffic/api/api/tolling?accesscode=1362087f-e048-4d10-b705-bbf06a0eef8d")
+      return this._http.get('tolls')
       .map(data=>data.json())
       .toPromise()
     }

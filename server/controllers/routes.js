@@ -3,6 +3,7 @@ var User = mongoose.model('User');
 var Route = mongoose.model('Route');
 mongoose.Promise = global.Promise
 var session = require('express-session')
+var request = require('request');
 
 module.exports = {
 
@@ -30,6 +31,21 @@ module.exports = {
                 })
             })
         })
+    },
+
+    tolls: function(req,res,next){
+        request("http://www.wsdot.wa.gov/traffic/api/api/tolling?accesscode=1362087f-e048-4d10-b705-bbf06a0eef8d", function (error, response, body){
+            if(error){
+                console.log("error",error)
+                res.status(500).json(false);
+            } else {
+                // console.log("response",response)
+                let newBody = JSON.parse(body)
+                console.log(newBody, typeof(newBody))
+                console.log("body",typeof(body))
+                res.status(200).json(newBody);
+            }
+        });
     },
 
     deleteRoute: function(req,res,next){

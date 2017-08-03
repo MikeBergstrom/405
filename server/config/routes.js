@@ -23,6 +23,8 @@ module.exports = function(app) {
     app.post('/tag', users.tag)
 
     app.get('/getAll', users.getAll)
+    
+    app.get('/tolls', routes.tolls)
 
     app.all('*', (req,res,next) => {
         console.log("in root route.js")
