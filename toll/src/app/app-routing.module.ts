@@ -5,7 +5,7 @@ import { TollComponent } from './toll/toll.component';
 import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
-    {path: '', pathMatch: 'full', redirectTo: 'login'},
+    {path: '', pathMatch: 'full', redirectTo: 'toll'},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'toll', component: TollComponent},

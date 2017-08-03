@@ -21,7 +21,7 @@ export class TollComponent implements OnInit {
   ngOnInit() {
     this._apiService.getUser()
     .then(user => {this.user=user; console.log("got user comp")})
-    .catch(() => {console.log("get user fail comop"); this._router.navigate(['/'])})
+    .catch(() => {console.log("get user fail comop")})
 
     this._apiService.getTolls()
     .then(tolls => {this.tolls=tolls;console.log("got tolls comp")})
